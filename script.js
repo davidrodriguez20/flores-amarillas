@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         secreto: {
             titulo: "¡Mensaje Secreto! 👑✨",
-            texto: "wtf, lo encontraste. Te quiero mucho, caro 💛🌻"
+            texto: "wtf, lo encontraste. Te quiero 💛🌻"
         }
     };
 
