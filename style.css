@@ -5,575 +5,339 @@
 }
 
 body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0b132b, #1c2541, #2a4365);
+    color: #fff;
     min-height: 100vh;
-    overflow: hidden;
-
-    font-family: Arial, sans-serif;
-
-    background: #050914;
-
-    color: white;
-}
-
-
-/* -------------------------
-   PANTALLA INICIAL
-------------------------- */
-
-.inicio {
-    position: fixed;
-
-    width: 100%;
-    height: 100vh;
-
     display: flex;
-    flex-direction: column;
-
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+}
 
+/* PANTALLA INICIAL */
+.inicio {
     text-align: center;
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    z-index: 20;
+}
 
-    z-index: 10;
-
-    transition:
-        opacity 1.5s ease,
-        transform 1.5s ease;
+.inicio.oculto {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
 }
 
 .pequeno {
-    color: #cfcfcf;
+    font-size: 1.1rem;
+    color: #fdd835;
+    margin-bottom: 10px;
+}
 
-    font-size: 15px;
+h1 {
+    font-size: 4.5rem;
+    margin: 10px 0;
+}
 
+h2 {
+    font-size: 2.2rem;
     margin-bottom: 15px;
 }
 
-.inicio h1 {
-    font-size: 70px;
-
-    animation:
-        flotar 3s ease-in-out infinite;
-}
-
-.inicio h2 {
-    margin-top: 10px;
-
-    font-size: 30px;
-
-    color: #ffe66d;
-}
-
 .subtitulo {
-    margin-top: 15px;
-
-    color: #aaa;
-
-    font-size: 15px;
+    font-size: 1rem;
+    color: #cfd8dc;
+    margin-bottom: 25px;
 }
 
-
-/* -------------------------
-   BOTÓN
-------------------------- */
-
-button {
-    margin-top: 35px;
-
-    padding: 15px 28px;
-
+#boton {
+    background: #fdd835;
+    color: #3e2723;
     border: none;
-    border-radius: 30px;
-
-    background: #ffd83d;
-
-    color: #4a3900;
-
-    font-size: 16px;
+    padding: 14px 32px;
+    font-size: 1.15rem;
     font-weight: bold;
-
+    border-radius: 30px;
     cursor: pointer;
-
-    box-shadow:
-        0 0 20px rgba(255, 216, 61, 0.3);
-
-    transition:
-        transform 0.2s,
-        box-shadow 0.2s;
+    box-shadow: 0 0 20px rgba(253, 216, 53, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    animation: pulso 2s infinite;
 }
 
-button:active {
-    transform: scale(0.92);
+#boton:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 30px rgba(253, 216, 53, 0.8);
 }
 
-button:hover {
-    box-shadow:
-        0 0 35px rgba(255, 216, 61, 0.6);
+@keyframes pulso {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
-
-/* -------------------------
-   JARDÍN
-------------------------- */
-
+/* ESCENA JARDÍN */
 .jardin {
-    position: fixed;
-
-    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100vw;
     height: 100vh;
-
-    overflow: hidden;
-
-    background:
-        radial-gradient(
-            circle at 50% 20%,
-            #18264a 0%,
-            #090f21 45%,
-            #03050c 100%
-        );
-
-    opacity: 0;
-
-    transition: opacity 2s ease;
-}
-
-
-/* -------------------------
-   LUNA
-------------------------- */
-
-.luna {
-    position: absolute;
-
-    top: 10%;
-    right: 12%;
-
-    width: 75px;
-    height: 75px;
-
-    border-radius: 50%;
-
-    background: #fff5c4;
-
-    box-shadow:
-        0 0 30px #fff5c4,
-        0 0 80px rgba(255, 245, 196, 0.3);
-}
-
-
-/* -------------------------
-   ESTRELLAS
-------------------------- */
-
-.estrellas {
-    position: fixed;
-
-    width: 100%;
-    height: 100%;
-
-    pointer-events: none;
-
-    z-index: 1;
-
-    background-image:
-        radial-gradient(
-            white 1px,
-            transparent 1px
-        );
-
-    background-size: 80px 80px;
-
-    opacity: 0.25;
-}
-
-
-/* -------------------------
-   SUELO
-------------------------- */
-
-.suelo {
-    position: absolute;
-
-    bottom: 0;
-
-    width: 100%;
-    height: 18%;
-
-    background:
-        linear-gradient(
-            to top,
-            #020504,
-            #07100a
-        );
-
-    border-top:
-        1px solid rgba(255,255,255,0.03);
-}
-
-
-/* -------------------------
-   FLORES
-------------------------- */
-
-.flores {
-    position: absolute;
-
-    bottom: 12%;
-
-    width: 100%;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: flex-end;
-
-    gap: 35px;
-}
-
-
-/* TALLO */
-
-.flor {
     position: relative;
-
-    width: 25px;
-    height: 230px;
-
-    animation:
-        aparecer 2s ease forwards;
-
-    transform-origin: bottom;
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
+.jardin.activo {
+    opacity: 1;
+}
 
-/* TALLO */
-
-.tallo {
+.instruccion {
     position: absolute;
+    top: 6%;
+    font-size: 1rem;
+    color: #fff59d;
+    background: rgba(0, 0, 0, 0.45);
+    padding: 10px 22px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    z-index: 25;
+    text-align: center;
+}
 
+/* RAMOS SUSPENDIDOS */
+.ramos-container {
+    position: absolute;
+    top: 18%;
+    display: flex;
+    gap: 40px;
+    z-index: 20;
+}
+
+.ramo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: flotar 3.5s infinite ease-in-out alternate;
+}
+
+.ramo:nth-child(2) { animation-delay: 1.2s; }
+.ramo:nth-child(3) { animation-delay: 2.4s; }
+
+.emoji-ramo {
+    font-size: 3.8rem;
+    filter: drop-shadow(0 8px 12px rgba(253, 216, 53, 0.4));
+}
+
+.etiqueta {
+    margin-top: 6px;
+    background: #fdd835;
+    color: #3e2723;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 5px 14px;
+    border-radius: 12px;
+}
+
+.ramo:hover {
+    transform: scale(1.18) translateY(-10px);
+}
+
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-16px); }
+}
+
+/* CAMPO DE FLORES ANIMADAS */
+.flores-campo {
+    width: 100vw;
+    height: 70vh;
+    position: absolute;
     bottom: 0;
-    left: 50%;
+    left: 0;
+    z-index: 5;
+}
 
-    width: 5px;
+.svg-campo {
+    width: 100%;
     height: 100%;
-
-    background: #315c2b;
-
-    transform: translateX(-50%);
 }
 
+/* ANIMACIONES DE TALLOS Y FLORES EN SVG */
+.tallo-animado {
+    fill: none;
+    stroke: #2d6a4f;
+    stroke-linecap: round;
+    stroke-dasharray: 600;
+    stroke-dashoffset: 600;
+    animation: crecerTallo 2.2s forwards ease-out;
+}
 
-/* HOJAS */
+.hoja-animada {
+    fill: #40916c;
+    opacity: 0;
+    animation: brotar 0.8s forwards ease-out;
+}
 
-.hoja {
+.cabeza-flor {
+    transform-origin: center;
+    transform: scale(0);
+    animation: florecer 0.9s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes crecerTallo {
+    to { stroke-dashoffset: 0; }
+}
+
+@keyframes brotar {
+    to { opacity: 1; }
+}
+
+@keyframes florecer {
+    to { transform: scale(1); }
+}
+
+/* MARIPOSAS INTERACTIVAS */
+.mariposa-interactiva {
     position: absolute;
-
-    width: 45px;
-    height: 20px;
-
-    background: #3f7733;
-
-    border-radius: 100% 0 100% 0;
+    font-size: 2.5rem;
+    z-index: 30;
+    cursor: pointer;
+    user-select: none;
+    transition: left 1.2s cubic-bezier(0.25, 1, 0.5, 1), top 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 0.3s ease;
+    filter: drop-shadow(0 0 10px rgba(255, 235, 59, 0.6));
+    animation: aleteo 0.4s infinite alternate ease-in-out;
 }
 
-.hoja1 {
-    left: -30px;
-    bottom: 65px;
-
-    transform: rotate(-25deg);
+.mariposa-interactiva:hover {
+    transform: scale(1.3);
 }
 
-.hoja2 {
-    right: -30px;
-    bottom: 105px;
-
-    transform: rotate(25deg);
+@keyframes aleteo {
+    0% { transform: scaleX(1) rotate(-5deg); }
+    100% { transform: scaleX(0.7) rotate(5deg); }
 }
 
-
-/* CENTRO DE LA FLOR */
-
-.centro {
+/* DESTELLOS DE LA MARIPOSA */
+.destello {
     position: absolute;
-
-    left: 50%;
-    top: -15px;
-
-    width: 35px;
-    height: 35px;
-
+    width: 8px;
+    height: 8px;
+    background: #fff59d;
     border-radius: 50%;
-
-    background: #6d4300;
-
-    transform: translateX(-50%);
-
-    z-index: 3;
+    pointer-events: none;
+    box-shadow: 0 0 10px #ffee58;
+    z-index: 28;
+    animation: desvanecer 1s forwards ease-out;
 }
 
+@keyframes desvanecer {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(2.5) translateY(-20px); }
+}
 
-/* PÉTALOS */
+/* PÉTALOS CAYENDO */
+.petalos-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 8;
+}
 
 .petalo {
     position: absolute;
-
-    left: 50%;
-    top: -35px;
-
-    width: 30px;
-    height: 55px;
-
-    border-radius: 50%;
-
-    background: #ffd92f;
-
-    transform-origin: center 52px;
-
-    box-shadow:
-        0 0 8px rgba(255, 215, 40, 0.4);
+    background: #fdd835;
+    border-radius: 15px 0 15px 0;
+    opacity: 0.8;
+    animation: caer linear infinite;
 }
 
-
-/* posiciones de pétalos */
-
-.p1 {
-    transform:
-        translateX(-50%)
-        rotate(0deg);
+@keyframes caer {
+    0% {
+        transform: translateY(-10vh) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0.2;
+    }
 }
 
-.p2 {
-    transform:
-        translateX(-50%)
-        rotate(45deg);
+/* MODAL CARTA */
+.modal-carta {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
 
-.p3 {
-    transform:
-        translateX(-50%)
-        rotate(90deg);
-}
-
-.p4 {
-    transform:
-        translateX(-50%)
-        rotate(135deg);
-}
-
-.p5 {
-    transform:
-        translateX(-50%)
-        rotate(180deg);
-}
-
-.p6 {
-    transform:
-        translateX(-50%)
-        rotate(225deg);
-}
-
-.p7 {
-    transform:
-        translateX(-50%)
-        rotate(270deg);
-}
-
-.p8 {
-    transform:
-        translateX(-50%)
-        rotate(315deg);
-}
-
-
-/* -------------------------
-   MENSAJE
-------------------------- */
-
-.mensaje {
-    position: absolute;
-
-    left: 50%;
-    top: 12%;
-
-    transform:
-        translateX(-50%)
-        translateY(-20px);
-
-    width: 90%;
-    max-width: 500px;
-
+.carta-contenido {
+    background: #fffde7;
+    color: #3e2723;
+    padding: 30px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 400px;
     text-align: center;
-
-    opacity: 0;
-
-    transition:
-        opacity 2s ease,
-        transform 2s ease;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    animation: abrirModal 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.mensaje-pequeno {
-    color: #ddd;
-
-    font-size: 15px;
-}
-
-.mensaje h2 {
-    margin-top: 8px;
-
-    color: #ffe45e;
-
-    font-size: 28px;
-
-    text-shadow:
-        0 0 15px rgba(255, 220, 70, 0.5);
-}
-
-.mensaje p {
-    margin-top: 12px;
-
-    color: #ddd;
-
-    line-height: 1.5;
-
-    font-size: 16px;
-}
-
-.mensaje span {
-    display: block;
-
-    margin-top: 15px;
-
-    font-size: 28px;
-}
-
-
-/* -------------------------
-   MARIPOSAS
-------------------------- */
-
-.mariposa {
+.cerrar-btn {
     position: absolute;
-
-    font-size: 25px;
-
-    opacity: 0;
-
-    animation:
-        volar 8s linear infinite;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #3e2723;
+    cursor: pointer;
 }
 
-.mariposa1 {
-    top: 45%;
-    left: -50px;
+.icono-carta {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
 }
 
-.mariposa2 {
-    top: 65%;
-    left: -100px;
-
-    animation-delay: 3s;
+.carta-contenido h3 {
+    margin-bottom: 12px;
+    color: #f57f17;
 }
 
-
-/* -------------------------
-   ANIMACIONES
-------------------------- */
-
-@keyframes flotar {
-
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
+.carta-contenido p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
 }
 
-
-@keyframes aparecer {
-
-    0% {
-        transform:
-            scaleY(0);
-
-        opacity: 0;
-    }
-
-    100% {
-        transform:
-            scaleY(1);
-
-        opacity: 1;
-    }
+.corazon-final {
+    font-size: 1.5rem;
 }
 
-
-@keyframes volar {
-
-    0% {
-        left: -50px;
-
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 1;
-    }
-
-    50% {
-        transform:
-            translateY(-70px)
-            rotate(10deg);
-    }
-
-    100% {
-        left: 110%;
-
-        opacity: 0;
-    }
+@keyframes abrirModal {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
-
-/* -------------------------
-   CELULAR
-------------------------- */
-
+/* RESPONSIVE */
 @media (max-width: 600px) {
-
-    .inicio h1 {
-        font-size: 60px;
+    .ramos-container {
+        top: 14%;
+        gap: 15px;
     }
-
-    .inicio h2 {
-        font-size: 25px;
-    }
-
-    .flores {
-        gap: 12px;
-    }
-
-    .flor {
-        height: 180px;
-    }
-
-    .mensaje {
-        top: 15%;
-    }
-
-    .mensaje h2 {
-        font-size: 23px;
-    }
-
-    .mensaje p {
-        font-size: 14px;
-    }
-
-    .luna {
-        width: 55px;
-        height: 55px;
-
-        right: 8%;
+    .emoji-ramo {
+        font-size: 3rem;
     }
 }

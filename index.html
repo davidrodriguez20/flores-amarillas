@@ -3,77 +3,80 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para ti 🌻</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="estrellas"></div>
-
     <main>
 
+        <!-- PANTALLA INICIAL -->
         <section class="inicio" id="inicio">
-
             <p class="pequeno">Tengo algo preparado para ti...</p>
-
             <h1>🌻</h1>
-
             <h2>Un pequeño detalle</h2>
-
-            <p class="subtitulo">
-                Toca la pantalla para descubrirlo
-            </p>
-
-            <button id="boton">
-                Abrir regalo 💛
-            </button>
-
+            <p class="subtitulo">Toca el botón para descubrirlo</p>
+            <button id="boton">Abrir regalo 💛</button>
         </section>
 
-
+        <!-- ESCENA DEL JARDÍN / JARDÍN INTERACTIVO -->
         <section class="jardin" id="jardin">
 
             <div class="luna"></div>
+            <div class="estrellas"></div>
 
-            <div class="suelo"></div>
+            <!-- CONTENEDOR DE PÉTALOS FLOTANTES -->
+            <div class="petalos-container" id="petalosContainer"></div>
 
-            <div class="flores" id="flores"></div>
-
-            <div class="mariposa mariposa1">🦋</div>
-            <div class="mariposa mariposa2">🦋</div>
-
-            <div class="mensaje" id="mensaje">
-
-                <p class="mensaje-pequeno">
-                    Para ti...
-                </p>
-
-                <h2>
-                    🌻 Flores amarillas 🌻
-                </h2>
-
-                <p>
-                    No pude entregártelas de una forma
-                    tradicional...
-                </p>
-
-                <p>
-                    así que decidí hacerlas.
-                </p>
-
-                <span>
-                    💛
-                </span>
-
+            <div class="instruccion">
+                <p>Toca las notas o interactúa con las mariposas 🦋✨</p>
             </div>
 
+            <!-- BOTONES/RAMOS SUSPENDIDOS (Cartas) -->
+            <div class="ramos-container">
+                <div class="ramo" data-mensaje="1">
+                    <span class="emoji-ramo">💐</span>
+                    <span class="etiqueta">Nota 1</span>
+                </div>
+                <div class="ramo" data-mensaje="2">
+                    <span class="emoji-ramo">🌻</span>
+                    <span class="etiqueta">Nota 2</span>
+                </div>
+                <div class="ramo" data-mensaje="3">
+                    <span class="emoji-ramo">💐</span>
+                    <span class="etiqueta">Nota 3</span>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE FLORES DINÁMICAS (SVG) -->
+            <div class="flores-campo">
+                <svg viewBox="0 0 1000 600" class="svg-campo" id="svgCampo" preserveAspectRatio="xMidYMax slice">
+                    <!-- El suelo -->
+                    <path d="M 0,550 Q 250,520 500,550 T 1000,530 L 1000,600 L 0,600 Z" fill="#1b4332" />
+                    <!-- Las flores brotarán dinámicamente aquí vía JS -->
+                    <g id="grupoFlores"></g>
+                </svg>
+            </div>
+
+            <!-- MARIPOSAS INTERACTIVAS -->
+            <div class="mariposa-interactiva" id="mariposa1" title="¡Tócame!">🦋</div>
+            <div class="mariposa-interactiva" id="mariposa2" title="¡Tócame!">🦋</div>
+            <div class="mariposa-interactiva" id="mariposa3" title="¡Tócame!">🦋</div>
+
         </section>
+
+        <!-- MODAL DE CARTA CON MENSAJE -->
+        <div class="modal-carta" id="modalCarta">
+            <div class="carta-contenido">
+                <button class="cerrar-btn" id="cerrarCarta">&times;</button>
+                <div class="icono-carta">✉️</div>
+                <h3 id="cartaTitulo">Un detalle especial</h3>
+                <p id="cartaTexto">Cargando mensaje...</p>
+                <span class="corazon-final">💛</span>
+            </div>
+        </div>
 
     </main>
 
