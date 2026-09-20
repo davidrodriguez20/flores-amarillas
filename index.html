@@ -30,8 +30,13 @@
             <!-- CONTENEDOR DE PÉTALOS FLOTANTES -->
             <div class="petalos-container" id="petalosContainer"></div>
 
-            <div class="instruccion">
-                <p>Toca las mariposas y los ramos 🦋✨</p>
+            <div class="instruccion" id="instruccion">
+                <p>Toca los ramos y las mariposas para interactuar 🦋✨</p>
+            </div>
+
+            <!-- AVISO DE DESBLOQUEO -->
+            <div class="aviso-desbloqueo" id="avisoDesbloqueo">
+                ✨ ¡Has descubierto el mensaje secreto! ✨
             </div>
 
             <!-- BOTONES/RAMOS SUSPENDIDOS (Cartas) -->
@@ -48,14 +53,17 @@
                     <span class="emoji-ramo">💐</span>
                     <span class="etiqueta">Nota 3</span>
                 </div>
+                <!-- RAMO SECRETO (Oculto al inicio) -->
+                <div class="ramo ramo-secreto" id="ramoSecreto" data-mensaje="secreto" style="display: none;">
+                    <span class="emoji-ramo">👑</span>
+                    <span class="etiqueta especial">Secreto 💛</span>
+                </div>
             </div>
 
             <!-- CONTENEDOR DE FLORES DINÁMICAS (SVG) -->
             <div class="flores-campo">
                 <svg viewBox="0 0 1000 600" class="svg-campo" id="svgCampo" preserveAspectRatio="xMidYMax slice">
-                    <!-- El suelo -->
                     <path d="M 0,550 Q 250,520 500,550 T 1000,530 L 1000,600 L 0,600 Z" fill="#1b4332" />
-                    <!-- Las flores brotarán dinámicamente aquí vía JS -->
                     <g id="grupoFlores"></g>
                 </svg>
             </div>

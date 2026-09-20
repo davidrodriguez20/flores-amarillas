@@ -104,12 +104,33 @@ h2 {
     text-align: center;
 }
 
+/* AVISO DE DESBLOQUEO */
+.aviso-desbloqueo {
+    display: none;
+    position: absolute;
+    top: 13%;
+    background: linear-gradient(45deg, #ffd54f, #ffb300);
+    color: #3e2723;
+    font-weight: bold;
+    padding: 10px 24px;
+    border-radius: 25px;
+    font-size: 1rem;
+    box-shadow: 0 0 20px rgba(255, 213, 79, 0.8);
+    z-index: 30;
+    animation: aparecerAviso 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes aparecerAviso {
+    0% { transform: scale(0.3); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
 /* RAMOS SUSPENDIDOS */
 .ramos-container {
     position: absolute;
     top: 18%;
     display: flex;
-    gap: 40px;
+    gap: 30px;
     z-index: 20;
 }
 
@@ -126,7 +147,7 @@ h2 {
 .ramo:nth-child(3) { animation-delay: 2.4s; }
 
 .emoji-ramo {
-    font-size: 3.8rem;
+    font-size: 3.5rem;
     filter: drop-shadow(0 8px 12px rgba(253, 216, 53, 0.4));
 }
 
@@ -149,6 +170,26 @@ h2 {
     100% { transform: translateY(-16px); }
 }
 
+/* RAMO SECRETO */
+.ramo-secreto {
+    animation: flotarEspecial 2.5s infinite ease-in-out alternate;
+}
+
+.ramo-secreto .emoji-ramo {
+    filter: drop-shadow(0 0 18px rgba(255, 215, 0, 0.9));
+}
+
+.etiqueta.especial {
+    background: linear-gradient(45deg, #ffe082, #ffb300);
+    color: #3e2723;
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.6);
+}
+
+@keyframes flotarEspecial {
+    0% { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-20px) scale(1.1); }
+}
+
 /* CAMPO DE FLORES ANIMADAS */
 .flores-campo {
     width: 100vw;
@@ -164,7 +205,6 @@ h2 {
     height: 100%;
 }
 
-/* ANIMACIONES DE TALLOS Y FLORES EN SVG */
 .tallo-animado {
     fill: none;
     stroke: #2d6a4f;
@@ -219,7 +259,6 @@ h2 {
     100% { transform: scaleX(0.7) rotate(5deg); }
 }
 
-/* DESTELLOS DE LA MARIPOSA */
 .destello {
     position: absolute;
     width: 8px;
@@ -320,6 +359,7 @@ h2 {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 15px;
+    white-space: pre-line;
 }
 
 .corazon-final {
@@ -331,10 +371,9 @@ h2 {
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* RESPONSIVE */
 @media (max-width: 600px) {
     .ramos-container {
-        top: 14%;
+        top: 15%;
         gap: 15px;
     }
     .emoji-ramo {

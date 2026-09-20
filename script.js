@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const petalosContainer = document.getElementById('petalosContainer');
 
     const ramos = document.querySelectorAll('.ramo');
+    const ramoSecreto = document.getElementById('ramoSecreto');
+    const avisoDesbloqueo = document.getElementById('avisoDesbloqueo');
+
     const modalCarta = document.getElementById('modalCarta');
     const cerrarCarta = document.getElementById('cerrarCarta');
     const cartaTitulo = document.getElementById('cartaTitulo');
@@ -13,23 +16,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mariposas = document.querySelectorAll('.mariposa-interactiva');
 
-    // Mensajes para las notas
+    const mariposasTocadas = new Set();
+    let secretoDesbloqueado = false;
+
+    // Mensajes para las cartas
     const mensajes = {
         1: {
             titulo: "Para ti... 🌻",
-            texto: "No pude entregártelas de forma tradicional, asi que se me acurrio hacer este puqeño jardín ¿Fino verdad? :D"
+            texto: "No pude entregártelas de forma tradicional, así que se me ocurrio hacer este pequeño jardín. :D"
         },
         2: {
             titulo: "Flores Amarillas ✨",
-            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa, omg"
+            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa. OMG :O"
         },
         3: {
-            titulo: "Un pequeño detalle 💛",
-            texto: "Cada flor, mariposa y pétalo en este espacio fueron programados especialmente para recordarte lo mucho que vales, sapa 🐸"
+            titulo: "Un detalle especial 💛",
+            texto: "Cada flor, mariposa y pétalo en este espacio fueron programados especialmente para recordarte lo mucho que vales, sapa 🐸 \n\nPD: Hay un mensaje oculto. 🦋 "
+        },
+        secreto: {
+            titulo: "¡Mensaje Secreto! 👑✨",
+            texto: "wtf, lo encontraste. Te quiero mucho, caro 💛🌻"
         }
     };
 
-    // AL PULSAR "ABRIR REGALO"
+    // Al pulsar "Abrir regalo"
     boton.addEventListener('click', () => {
         inicio.classList.add('oculto');
         
@@ -38,14 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
             jardin.style.display = 'flex';
             setTimeout(() => {
                 jardin.classList.add('activo');
-                generarCampoDeFlores(18); // Genera 18 flores variadas
+                generarCampoDeFlores(18);
                 crearLluviaDePetalos();
                 iniciarMariposas();
             }, 50);
         }, 600);
     });
 
-    // GENERADOR DINÁMICO DE DIVERSOS TIPOS DE FLORES AMARILLAS EN SVG
+    // Generador dinámico de flores en SVG
     function generarCampoDeFlores(cantidad) {
         const tiposFlores = ['girasol', 'margarita', 'tulipan', 'crisantemo', 'estrella'];
         
@@ -58,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const tipo = tiposFlores[Math.floor(Math.random() * tiposFlores.length)];
             const delay = (Math.random() * 1.5 + 0.2).toFixed(2);
 
-            // Crear Tallo
             const tallo = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             const curvatura = (Math.random() - 0.5) * 60;
             tallo.setAttribute('d', `M ${x},${ySuelo} Q ${x + curvatura},${ySuelo - altoTallo / 2} ${x},${yFlor}`);
@@ -66,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tallo.setAttribute('style', `stroke-width: ${grosorTallo}px; animation-delay: ${delay}s;`);
             grupoFlores.appendChild(tallo);
 
-            // Crear Hoja aleatoria
             if (Math.random() > 0.3) {
                 const hoja = document.createElementNS('http://www.w3.org/2000/svg', 'path');
                 const lado = Math.random() > 0.5 ? 1 : -1;
@@ -76,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 grupoFlores.appendChild(hoja);
             }
 
-            // Crear Cabeza de Flor según tipo
             const gFlor = document.createElementNS('http://www.w3.org/2000/svg', 'g');
             gFlor.setAttribute('class', 'cabeza-flor');
             gFlor.setAttribute('style', `transform-origin: ${x}px ${yFlor}px; animation-delay: ${(parseFloat(delay) + 1.2).toFixed(2)}s;`);
@@ -86,18 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // DIBUJA DIFERENTES MODELOS DE FLORES AMARILLAS EN EL SVG
     function dibujarTipoFlor(grupo, cx, cy, tipo) {
         const coloresPetalos = ['#fdd835', '#ffee58', '#fbc02d', '#f57f17', '#fff176'];
         
         if (tipo === 'girasol') {
             for (let i = 0; i < 12; i++) {
                 const angulo = (i * 30) * Math.PI / 180;
-                const px = cx + Math.cos(angulo) * 22;
-                const py = cy + Math.sin(angulo) * 22;
                 const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                petalo.setAttribute('cx', px);
-                petalo.setAttribute('cy', py);
+                petalo.setAttribute('cx', cx + Math.cos(angulo) * 22);
+                petalo.setAttribute('cy', cy + Math.sin(angulo) * 22);
                 petalo.setAttribute('r', '11');
                 petalo.setAttribute('fill', coloresPetalos[i % coloresPetalos.length]);
                 grupo.appendChild(petalo);
@@ -112,11 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (tipo === 'margarita') {
             for (let i = 0; i < 8; i++) {
                 const angulo = (i * 45) * Math.PI / 180;
-                const px = cx + Math.cos(angulo) * 16;
-                const py = cy + Math.sin(angulo) * 16;
                 const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                petalo.setAttribute('cx', px);
-                petalo.setAttribute('cy', py);
+                petalo.setAttribute('cx', cx + Math.cos(angulo) * 16);
+                petalo.setAttribute('cy', cy + Math.sin(angulo) * 16);
                 petalo.setAttribute('r', '9');
                 petalo.setAttribute('fill', '#fff59d');
                 grupo.appendChild(petalo);
@@ -128,24 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             centro.setAttribute('fill', '#fbc02d');
             grupo.appendChild(centro);
 
-        } else if (tipo === 'tulipan') {
-            const petaloIzq = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            petaloIzq.setAttribute('d', `M ${cx},${cy + 15} C ${cx - 25},${cy} ${cx - 20},${cy - 25} ${cx - 8},${cy - 20}`);
-            petaloIzq.setAttribute('fill', '#fbc02d');
-
-            const petaloDer = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            petaloDer.setAttribute('d', `M ${cx},${cy + 15} C ${cx + 25},${cy} ${cx + 20},${cy - 25} ${cx + 8},${cy - 20}`);
-            petaloDer.setAttribute('fill', '#fdd835');
-
-            const petaloCentro = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            petaloCentro.setAttribute('d', `M ${cx - 12},${cy + 10} Q ${cx},${cy - 30} ${cx + 12},${cy + 10} Z`);
-            petaloCentro.setAttribute('fill', '#ffee58');
-
-            grupo.appendChild(petaloIzq);
-            grupo.appendChild(petaloDer);
-            grupo.appendChild(petaloCentro);
-
-        } else { // Crisantemo / Estrella
+        } else {
             for (let i = 0; i < 6; i++) {
                 const angulo = (i * 60) * Math.PI / 180;
                 const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
@@ -166,19 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // MARIPOSAS INTERACTIVAS (Mover al tocar)
+    // Mariposas interactivas
     function iniciarMariposas() {
-        mariposas.forEach((m, index) => {
+        mariposas.forEach((m, idx) => {
             moverMariposa(m);
             m.addEventListener('click', () => {
                 crearDestellos(m);
                 moverMariposa(m);
+                mariposasTocadas.add(idx);
+                comprobarSecretoMariposas();
             });
         });
     }
 
     function moverMariposa(mariposa) {
-        const top = Math.random() * 50 + 15; // Mantener en zona visible alta
+        const top = Math.random() * 50 + 15;
         const left = Math.random() * 80 + 10;
         mariposa.style.top = `${top}vh`;
         mariposa.style.left = `${left}vw`;
@@ -197,17 +184,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // LLUVIA DE PÉTALOS
+    function comprobarSecretoMariposas() {
+        if (mariposasTocadas.size >= 3 && !secretoDesbloqueado) {
+            secretoDesbloqueado = true;
+            ramoSecreto.style.display = 'flex';
+            avisoDesbloqueo.style.display = 'block';
+
+            setTimeout(() => {
+                avisoDesbloqueo.style.display = 'none';
+            }, 4500);
+        }
+    }
+
+    // Lluvia de pétalos
     function crearLluviaDePetalos() {
         for (let i = 0; i < 25; i++) {
             const petalo = document.createElement('div');
             petalo.classList.add('petalo');
             
-            const ancho = Math.random() * 12 + 8;
-            const alto = Math.random() * 18 + 12;
-            
-            petalo.style.width = `${ancho}px`;
-            petalo.style.height = `${alto}px`;
+            petalo.style.width = `${Math.random() * 12 + 8}px`;
+            petalo.style.height = `${Math.random() * 18 + 12}px`;
             petalo.style.left = `${Math.random() * 100}vw`;
             petalo.style.animationDuration = `${Math.random() * 4 + 4}s`;
             petalo.style.animationDelay = `${Math.random() * 5}s`;
@@ -216,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // CARTA DE MENSAJES
+    // Modal de notas
     ramos.forEach(ramo => {
         ramo.addEventListener('click', () => {
             const id = ramo.getAttribute('data-mensaje');
