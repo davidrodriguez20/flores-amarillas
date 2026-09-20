@@ -1,0 +1,579 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+
+    font-family: Arial, sans-serif;
+
+    background: #050914;
+
+    color: white;
+}
+
+
+/* -------------------------
+   PANTALLA INICIAL
+------------------------- */
+
+.inicio {
+    position: fixed;
+
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    z-index: 10;
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+.pequeno {
+    color: #cfcfcf;
+
+    font-size: 15px;
+
+    margin-bottom: 15px;
+}
+
+.inicio h1 {
+    font-size: 70px;
+
+    animation:
+        flotar 3s ease-in-out infinite;
+}
+
+.inicio h2 {
+    margin-top: 10px;
+
+    font-size: 30px;
+
+    color: #ffe66d;
+}
+
+.subtitulo {
+    margin-top: 15px;
+
+    color: #aaa;
+
+    font-size: 15px;
+}
+
+
+/* -------------------------
+   BOTÓN
+------------------------- */
+
+button {
+    margin-top: 35px;
+
+    padding: 15px 28px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #ffd83d;
+
+    color: #4a3900;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 20px rgba(255, 216, 61, 0.3);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+button:active {
+    transform: scale(0.92);
+}
+
+button:hover {
+    box-shadow:
+        0 0 35px rgba(255, 216, 61, 0.6);
+}
+
+
+/* -------------------------
+   JARDÍN
+------------------------- */
+
+.jardin {
+    position: fixed;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            #18264a 0%,
+            #090f21 45%,
+            #03050c 100%
+        );
+
+    opacity: 0;
+
+    transition: opacity 2s ease;
+}
+
+
+/* -------------------------
+   LUNA
+------------------------- */
+
+.luna {
+    position: absolute;
+
+    top: 10%;
+    right: 12%;
+
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: #fff5c4;
+
+    box-shadow:
+        0 0 30px #fff5c4,
+        0 0 80px rgba(255, 245, 196, 0.3);
+}
+
+
+/* -------------------------
+   ESTRELLAS
+------------------------- */
+
+.estrellas {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+    z-index: 1;
+
+    background-image:
+        radial-gradient(
+            white 1px,
+            transparent 1px
+        );
+
+    background-size: 80px 80px;
+
+    opacity: 0.25;
+}
+
+
+/* -------------------------
+   SUELO
+------------------------- */
+
+.suelo {
+    position: absolute;
+
+    bottom: 0;
+
+    width: 100%;
+    height: 18%;
+
+    background:
+        linear-gradient(
+            to top,
+            #020504,
+            #07100a
+        );
+
+    border-top:
+        1px solid rgba(255,255,255,0.03);
+}
+
+
+/* -------------------------
+   FLORES
+------------------------- */
+
+.flores {
+    position: absolute;
+
+    bottom: 12%;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-end;
+
+    gap: 35px;
+}
+
+
+/* TALLO */
+
+.flor {
+    position: relative;
+
+    width: 25px;
+    height: 230px;
+
+    animation:
+        aparecer 2s ease forwards;
+
+    transform-origin: bottom;
+}
+
+
+/* TALLO */
+
+.tallo {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 5px;
+    height: 100%;
+
+    background: #315c2b;
+
+    transform: translateX(-50%);
+}
+
+
+/* HOJAS */
+
+.hoja {
+    position: absolute;
+
+    width: 45px;
+    height: 20px;
+
+    background: #3f7733;
+
+    border-radius: 100% 0 100% 0;
+}
+
+.hoja1 {
+    left: -30px;
+    bottom: 65px;
+
+    transform: rotate(-25deg);
+}
+
+.hoja2 {
+    right: -30px;
+    bottom: 105px;
+
+    transform: rotate(25deg);
+}
+
+
+/* CENTRO DE LA FLOR */
+
+.centro {
+    position: absolute;
+
+    left: 50%;
+    top: -15px;
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    background: #6d4300;
+
+    transform: translateX(-50%);
+
+    z-index: 3;
+}
+
+
+/* PÉTALOS */
+
+.petalo {
+    position: absolute;
+
+    left: 50%;
+    top: -35px;
+
+    width: 30px;
+    height: 55px;
+
+    border-radius: 50%;
+
+    background: #ffd92f;
+
+    transform-origin: center 52px;
+
+    box-shadow:
+        0 0 8px rgba(255, 215, 40, 0.4);
+}
+
+
+/* posiciones de pétalos */
+
+.p1 {
+    transform:
+        translateX(-50%)
+        rotate(0deg);
+}
+
+.p2 {
+    transform:
+        translateX(-50%)
+        rotate(45deg);
+}
+
+.p3 {
+    transform:
+        translateX(-50%)
+        rotate(90deg);
+}
+
+.p4 {
+    transform:
+        translateX(-50%)
+        rotate(135deg);
+}
+
+.p5 {
+    transform:
+        translateX(-50%)
+        rotate(180deg);
+}
+
+.p6 {
+    transform:
+        translateX(-50%)
+        rotate(225deg);
+}
+
+.p7 {
+    transform:
+        translateX(-50%)
+        rotate(270deg);
+}
+
+.p8 {
+    transform:
+        translateX(-50%)
+        rotate(315deg);
+}
+
+
+/* -------------------------
+   MENSAJE
+------------------------- */
+
+.mensaje {
+    position: absolute;
+
+    left: 50%;
+    top: 12%;
+
+    transform:
+        translateX(-50%)
+        translateY(-20px);
+
+    width: 90%;
+    max-width: 500px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transition:
+        opacity 2s ease,
+        transform 2s ease;
+}
+
+.mensaje-pequeno {
+    color: #ddd;
+
+    font-size: 15px;
+}
+
+.mensaje h2 {
+    margin-top: 8px;
+
+    color: #ffe45e;
+
+    font-size: 28px;
+
+    text-shadow:
+        0 0 15px rgba(255, 220, 70, 0.5);
+}
+
+.mensaje p {
+    margin-top: 12px;
+
+    color: #ddd;
+
+    line-height: 1.5;
+
+    font-size: 16px;
+}
+
+.mensaje span {
+    display: block;
+
+    margin-top: 15px;
+
+    font-size: 28px;
+}
+
+
+/* -------------------------
+   MARIPOSAS
+------------------------- */
+
+.mariposa {
+    position: absolute;
+
+    font-size: 25px;
+
+    opacity: 0;
+
+    animation:
+        volar 8s linear infinite;
+}
+
+.mariposa1 {
+    top: 45%;
+    left: -50px;
+}
+
+.mariposa2 {
+    top: 65%;
+    left: -100px;
+
+    animation-delay: 3s;
+}
+
+
+/* -------------------------
+   ANIMACIONES
+------------------------- */
+
+@keyframes flotar {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+@keyframes aparecer {
+
+    0% {
+        transform:
+            scaleY(0);
+
+        opacity: 0;
+    }
+
+    100% {
+        transform:
+            scaleY(1);
+
+        opacity: 1;
+    }
+}
+
+
+@keyframes volar {
+
+    0% {
+        left: -50px;
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateY(-70px)
+            rotate(10deg);
+    }
+
+    100% {
+        left: 110%;
+
+        opacity: 0;
+    }
+}
+
+
+/* -------------------------
+   CELULAR
+------------------------- */
+
+@media (max-width: 600px) {
+
+    .inicio h1 {
+        font-size: 60px;
+    }
+
+    .inicio h2 {
+        font-size: 25px;
+    }
+
+    .flores {
+        gap: 12px;
+    }
+
+    .flor {
+        height: 180px;
+    }
+
+    .mensaje {
+        top: 15%;
+    }
+
+    .mensaje h2 {
+        font-size: 23px;
+    }
+
+    .mensaje p {
+        font-size: 14px;
+    }
+
+    .luna {
+        width: 55px;
+        height: 55px;
+
+        right: 8%;
+    }
+}
