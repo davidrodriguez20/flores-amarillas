@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         2: {
             titulo: "Flores Amarillas ✨",
-            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa. OMG :O"
+            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa. omg "
         },
         3: {
             titulo: "Un detalle especial 💛",
