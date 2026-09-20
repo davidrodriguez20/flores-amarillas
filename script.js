@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajes = {
         1: {
             titulo: "Para ti... 🌻",
-            texto: "No pude entregártelas de forma tradicional, así que decidí crearte este jardín digital lleno de vida para que siempre florezca. :D"
+            texto: "No pude entregártelas de forma tradicional, asi que se me acurrio hacer este puqeño jardín ¿Fino verdad? :D"
         },
         2: {
             titulo: "Flores Amarillas ✨",
