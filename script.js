@@ -17,15 +17,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const mensajes = {
         1: {
             titulo: "Para ti... 🌻",
-            texto: "No pude entregártelas de forma tradicional, así que decidí crearte este jardín digital lleno de vida para que siempre florezca."
+            texto: "No pude entregártelas de forma tradicional, así que decidí crearte este jardín digital lleno de vida para que siempre florezca. :D"
         },
         2: {
             titulo: "Flores Amarillas ✨",
-            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa."
+            texto: "Representan la alegría, la luz y la calidez que le das a quienes te rodean. Espero que este detalle te dibuje una gran sonrisa, omg"
         },
         3: {
-            titulo: "Un detalle especial 💛",
-            texto: "Cada flor, mariposa y pétalo en este espacio fueron programados especialmente para recordarte lo mucho que vales."
+            titulo: "Un pequeño detalle 💛",
+            texto: "Cada flor, mariposa y pétalo en este espacio fueron programados especialmente para recordarte lo mucho que vales, sapa 🐸"
         }
     };
 
