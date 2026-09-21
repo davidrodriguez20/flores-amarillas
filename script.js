@@ -44,10 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // Al pulsar "Abrir regalo"
+   // Al pulsar "Abrir regalo"
     boton.addEventListener('click', () => {
-        // Reproducir música
+        // Forzar reproducción de música
         if (musicaFondo) {
-            musicaFondo.volume = 0.7; // Volumen al 70%
+            musicaFondo.volume = 0.8;
             musicaFondo.play().then(() => {
                 musicaReproduciendo = true;
                 if (btnMusica) btnMusica.innerText = '🎵';
