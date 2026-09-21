@@ -45,11 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Al pulsar "Abrir regalo"
     boton.addEventListener('click', () => {
-        // Iniciar música
+        // Reproducir música
         if (musicaFondo) {
+            musicaFondo.volume = 0.7; // Volumen al 70%
             musicaFondo.play().then(() => {
                 musicaReproduciendo = true;
-            }).catch(e => console.log("Audio autostart bloqueado:", e));
+                if (btnMusica) btnMusica.innerText = '🎵';
+            }).catch(e => {
+                console.log("Error al reproducir audio:", e);
+            });
         }
 
         inicio.classList.add('oculto');
