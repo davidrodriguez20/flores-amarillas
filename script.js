@@ -45,16 +45,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Al pulsar "Abrir regalo"
    // Al pulsar "Abrir regalo"
+   // Al pulsar "Abrir regalo"
+    // Al pulsar "Abrir regalo"
+   // Al pulsar "Abrir regalo"
+  // Al pulsar "Abrir regalo"
     boton.addEventListener('click', () => {
-        // Forzar reproducción de música
+        // Forzar desbloqueo y reproducción
         if (musicaFondo) {
             musicaFondo.volume = 0.8;
-            musicaFondo.play().then(() => {
-                musicaReproduciendo = true;
-                if (btnMusica) btnMusica.innerText = '🎵';
-            }).catch(e => {
-                console.log("Error al reproducir audio:", e);
-            });
+            musicaFondo.muted = false;
+            
+            const playPromise = musicaFondo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    musicaReproduciendo = true;
+                    if (btnMusica) btnMusica.innerText = '🎵';
+                }).catch(e => {
+                    console.log("Error al reproductor audio:", e);
+                });
+            }
         }
 
         inicio.classList.add('oculto');
