@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mariposasTocadas = new Set();
     let secretoDesbloqueado = false;
 
-    // Mensajes para las cartas
+    // Mensajes para las cartas (Tus textos exactos)
     const mensajes = {
         1: {
             titulo: "Para ti... 🌻",
@@ -55,23 +55,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 600);
     });
 
-    // Generador dinámico de flores en SVG
+    // Generador dinámico de flores en SVG (Estilo TikTok Resplandeciente)
     function generarCampoDeFlores(cantidad) {
-        const tiposFlores = ['girasol', 'margarita', 'tulipan', 'crisantemo', 'estrella'];
-        
         for (let i = 0; i < cantidad; i++) {
-            const x = (1000 / (cantidad + 1)) * (i + 1) + (Math.random() * 40 - 20);
+            const x = (1000 / (cantidad + 1)) * (i + 1) + (Math.random() * 30 - 15);
             const ySuelo = 550 + Math.random() * 20;
             const altoTallo = Math.random() * 180 + 160;
             const yFlor = ySuelo - altoTallo;
-            const grosorTallo = Math.random() * 3 + 5;
-            const tipo = tiposFlores[Math.floor(Math.random() * tiposFlores.length)];
+            const grosorTallo = Math.random() * 2 + 5;
             const delay = (Math.random() * 1.5 + 0.2).toFixed(2);
 
             const tallo = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-            const curvatura = (Math.random() - 0.5) * 60;
+            const curvatura = (Math.random() - 0.5) * 50;
             tallo.setAttribute('d', `M ${x},${ySuelo} Q ${x + curvatura},${ySuelo - altoTallo / 2} ${x},${yFlor}`);
-            tallo.setAttribute('class', 'tallo-animado');
+            tallo.setAttribute('class', 'tallo-tiktok');
             tallo.setAttribute('style', `stroke-width: ${grosorTallo}px; animation-delay: ${delay}s;`);
             grupoFlores.appendChild(tallo);
 
@@ -85,70 +82,58 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const gFlor = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            gFlor.setAttribute('class', 'cabeza-flor');
             gFlor.setAttribute('style', `transform-origin: ${x}px ${yFlor}px; animation-delay: ${(parseFloat(delay) + 1.2).toFixed(2)}s;`);
 
-            dibujarTipoFlor(gFlor, x, yFlor, tipo);
+            dibujarFlorTikTok(gFlor, x, yFlor);
             grupoFlores.appendChild(gFlor);
         }
     }
 
-    function dibujarTipoFlor(grupo, cx, cy, tipo) {
-        const coloresPetalos = ['#fdd835', '#ffee58', '#fbc02d', '#f57f17', '#fff176'];
-        
-        if (tipo === 'girasol') {
-            for (let i = 0; i < 12; i++) {
-                const angulo = (i * 30) * Math.PI / 180;
-                const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                petalo.setAttribute('cx', cx + Math.cos(angulo) * 22);
-                petalo.setAttribute('cy', cy + Math.sin(angulo) * 22);
-                petalo.setAttribute('r', '11');
-                petalo.setAttribute('fill', coloresPetalos[i % coloresPetalos.length]);
-                grupo.appendChild(petalo);
-            }
-            const centro = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            centro.setAttribute('cx', cx);
-            centro.setAttribute('cy', cy);
-            centro.setAttribute('r', '18');
-            centro.setAttribute('fill', '#4e342e');
-            grupo.appendChild(centro);
+    // Dibuja la flor de copa con halo de luz resplandeciente
+    function dibujarFlorTikTok(grupo, cx, cy) {
+        grupo.setAttribute('class', 'cabeza-flor flor-tiktok');
 
-        } else if (tipo === 'margarita') {
-            for (let i = 0; i < 8; i++) {
-                const angulo = (i * 45) * Math.PI / 180;
-                const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-                petalo.setAttribute('cx', cx + Math.cos(angulo) * 16);
-                petalo.setAttribute('cy', cy + Math.sin(angulo) * 16);
-                petalo.setAttribute('r', '9');
-                petalo.setAttribute('fill', '#fff59d');
-                grupo.appendChild(petalo);
-            }
-            const centro = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            centro.setAttribute('cx', cx);
-            centro.setAttribute('cy', cy);
-            centro.setAttribute('r', '12');
-            centro.setAttribute('fill', '#fbc02d');
-            grupo.appendChild(centro);
+        // Resplandor de luz amarillo detrás de la flor
+        const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        halo.setAttribute('cx', cx);
+        halo.setAttribute('cy', cy - 5);
+        halo.setAttribute('r', '28');
+        halo.setAttribute('fill', 'rgba(255, 235, 59, 0.35)');
+        grupo.appendChild(halo);
 
-        } else {
-            for (let i = 0; i < 6; i++) {
-                const angulo = (i * 60) * Math.PI / 180;
-                const petalo = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
-                petalo.setAttribute('cx', cx + Math.cos(angulo) * 12);
-                petalo.setAttribute('cy', cy + Math.sin(angulo) * 12);
-                petalo.setAttribute('rx', '15');
-                petalo.setAttribute('ry', '7');
-                petalo.setAttribute('fill', '#fdd835');
-                petalo.setAttribute('transform', `rotate(${i * 60}, ${cx + Math.cos(angulo) * 12}, ${cy + Math.sin(angulo) * 12})`);
-                grupo.appendChild(petalo);
-            }
-            const centro = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            centro.setAttribute('cx', cx);
-            centro.setAttribute('cy', cy);
-            centro.setAttribute('r', '8');
-            centro.setAttribute('fill', '#e65100');
-            grupo.appendChild(centro);
-        }
+        // Pétalo posterior
+        const petaloAtras = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        petaloAtras.setAttribute('d', `M ${cx - 10},${cy} Q ${cx},${cy - 28} ${cx + 10},${cy}`);
+        petaloAtras.setAttribute('fill', '#fff176');
+        grupo.appendChild(petaloAtras);
+
+        // Pétalo izquierdo
+        const petaloIzq = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        petaloIzq.setAttribute('d', `M ${cx - 2},${cy + 10} C ${cx - 28},${cy - 5} ${cx - 22},${cy - 22} ${cx - 5},${cy - 12}`);
+        petaloIzq.setAttribute('fill', '#fdd835');
+        grupo.appendChild(petaloIzq);
+
+        // Pétalo derecho
+        const petaloDer = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        petaloDer.setAttribute('d', `M ${cx + 2},${cy + 10} C ${cx + 28},${cy - 5} ${cx + 22},${cy - 22} ${cx + 5},${cy - 12}`);
+        petaloDer.setAttribute('fill', '#fdd835');
+        grupo.appendChild(petaloDer);
+
+        // Copa interior de la flor
+        const copaCentro = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        copaCentro.setAttribute('d', `M ${cx - 16},${cy - 2} C ${cx - 12},${cy + 16} ${cx + 12},${cy + 16} ${cx + 16},${cy - 2} Q ${cx},${cy + 8} ${cx - 16},${cy - 2}`);
+        copaCentro.setAttribute('fill', '#fbc02d');
+        grupo.appendChild(copaCentro);
+
+        // Anillo blanco brillante
+        const brilloCopa = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        brilloCopa.setAttribute('cx', cx);
+        brilloCopa.setAttribute('cy', cy - 2);
+        brilloCopa.setAttribute('rx', '14');
+        brilloCopa.setAttribute('ry', '4');
+        brilloCopa.setAttribute('fill', '#ffffff');
+        brilloCopa.setAttribute('opacity', '0.85');
+        grupo.appendChild(brilloCopa);
     }
 
     // Mariposas interactivas
