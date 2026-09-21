@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         secreto: {
             titulo: "¡Mensaje Secreto! 👑✨",
-            texto: "wtf, lo encontraste. Espero que nunca dejes de sonreír ni de lograr todo lo que te propones. Te quiero💛🌻"
+            texto: "wtf, lo encontraste. \nEspero que nunca dejes de sonreír ni de lograr todo lo que te propones. Te quiero 💛🌻 \n\n(Disculpa por no poder mandarte el ramo) "
         }
     };
 
