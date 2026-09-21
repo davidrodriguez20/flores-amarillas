@@ -16,10 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mariposas = document.querySelectorAll('.mariposa-interactiva');
 
+    const musicaFondo = document.getElementById('musicaFondo');
+    const btnMusica = document.getElementById('btnMusica');
+    let musicaReproduciendo = false;
+
     const mariposasTocadas = new Set();
     let secretoDesbloqueado = false;
 
-    // Mensajes para las cartas (Tus textos exactos)
+    // Mensajes para las cartas (Tus textos)
     const mensajes = {
         1: {
             titulo: "Para ti... 🌻",
@@ -41,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Al pulsar "Abrir regalo"
     boton.addEventListener('click', () => {
+        // Iniciar música
+        if (musicaFondo) {
+            musicaFondo.play().then(() => {
+                musicaReproduciendo = true;
+            }).catch(e => console.log("Audio autostart bloqueado:", e));
+        }
+
         inicio.classList.add('oculto');
         
         setTimeout(() => {
@@ -54,6 +65,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 50);
         }, 600);
     });
+
+    // Control de Play / Pause de música
+    if (btnMusica && musicaFondo) {
+        btnMusica.addEventListener('click', () => {
+            if (musicaReproduciendo) {
+                musicaFondo.pause();
+                btnMusica.innerText = '🔇';
+                musicaReproduciendo = false;
+            } else {
+                musicaFondo.play();
+                btnMusica.innerText = '🎵';
+                musicaReproduciendo = true;
+            }
+        });
+    }
 
     // Generador dinámico de flores en SVG (Estilo TikTok Resplandeciente)
     function generarCampoDeFlores(cantidad) {
@@ -93,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function dibujarFlorTikTok(grupo, cx, cy) {
         grupo.setAttribute('class', 'cabeza-flor flor-tiktok');
 
-        // Resplandor de luz amarillo detrás de la flor
         const halo = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         halo.setAttribute('cx', cx);
         halo.setAttribute('cy', cy - 5);
@@ -101,31 +126,26 @@ document.addEventListener('DOMContentLoaded', () => {
         halo.setAttribute('fill', 'rgba(255, 235, 59, 0.35)');
         grupo.appendChild(halo);
 
-        // Pétalo posterior
         const petaloAtras = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         petaloAtras.setAttribute('d', `M ${cx - 10},${cy} Q ${cx},${cy - 28} ${cx + 10},${cy}`);
         petaloAtras.setAttribute('fill', '#fff176');
         grupo.appendChild(petaloAtras);
 
-        // Pétalo izquierdo
         const petaloIzq = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         petaloIzq.setAttribute('d', `M ${cx - 2},${cy + 10} C ${cx - 28},${cy - 5} ${cx - 22},${cy - 22} ${cx - 5},${cy - 12}`);
         petaloIzq.setAttribute('fill', '#fdd835');
         grupo.appendChild(petaloIzq);
 
-        // Pétalo derecho
         const petaloDer = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         petaloDer.setAttribute('d', `M ${cx + 2},${cy + 10} C ${cx + 28},${cy - 5} ${cx + 22},${cy - 22} ${cx + 5},${cy - 12}`);
         petaloDer.setAttribute('fill', '#fdd835');
         grupo.appendChild(petaloDer);
 
-        // Copa interior de la flor
         const copaCentro = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         copaCentro.setAttribute('d', `M ${cx - 16},${cy - 2} C ${cx - 12},${cy + 16} ${cx + 12},${cy + 16} ${cx + 16},${cy - 2} Q ${cx},${cy + 8} ${cx - 16},${cy - 2}`);
         copaCentro.setAttribute('fill', '#fbc02d');
         grupo.appendChild(copaCentro);
 
-        // Anillo blanco brillante
         const brilloCopa = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
         brilloCopa.setAttribute('cx', cx);
         brilloCopa.setAttribute('cy', cy - 2);
